@@ -47,9 +47,9 @@ function startTicking() {
 
     document.getElementById('ticksPassed').innerText = `Ticks passed: ${tickCount}`;
 
-    if (tickCount >= 4) {
-        beep();
-        beep();
+    if (tickCount >= 2) {
+        beep2();
+        setTimeout(beep2, 300);
         document.getElementById('status').innerText = "Egg hatched!";
         tickCount = 0;
     } else {
@@ -70,6 +70,24 @@ function beep() {
     oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // frequency in Hz (A4 note)
     oscillator.start();
 
-    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.1); // Beep duration
-    oscillator.stop(audioContext.currentTime + 0.1);
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.2); // Beep duration
+    oscillator.stop(audioContext.currentTime + 0.2);
+}
+
+function beep2() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.type = 'square';
+    oscillator.frequency.setValueAtTime(1046, audioContext.currentTime); // frequency in Hz (A4 note)
+    gainNode.gain.setValueAtTime(1, audioContext.currentTime); // Set initial gain (volume)
+
+    oscillator.start();
+
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 1); // Beep duration
+    oscillator.stop(audioContext.currentTime + 1);
 }
