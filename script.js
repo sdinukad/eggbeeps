@@ -47,7 +47,7 @@ function startTicking() {
 
     document.getElementById('ticksPassed').innerText = `Ticks passed: ${tickCount}`;
 
-    if (tickCount >= 2) {
+    if (tickCount >= 4) {
         beep2();
         setTimeout(beep2, 300);
         document.getElementById('status').innerText = "Egg hatched!";
