@@ -39,7 +39,11 @@ function startCountdown(delay) {
 
         if (remainingTime <= 0) {
             clearInterval(countdownInterval);
+            document.getElementById('countdown').innerText = `Next tick in: 0s`;
+        } else {
+            document.getElementById('countdown').innerText = `Next tick in: ${remainingTime}s`;
         }
+
     }, 1000);
 }
 
