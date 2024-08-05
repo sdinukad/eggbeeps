@@ -1,11 +1,13 @@
 let tickCount = 0;
 let countdownInterval;
 let tickTimeout;
+let continuousMode = false;
 
 document.getElementById('startButton').addEventListener('click', () => {
     tickCount = 0;
     document.getElementById('status').innerText = "Started...";
     document.getElementById('ticksPassed').innerText = "Ticks passed: 0";
+    continuousMode = document.getElementById('continuousMode').checked; // Get continuous mode state
     if (countdownInterval) clearInterval(countdownInterval);
     if (tickTimeout) clearTimeout(tickTimeout);
     waitForSixthSecond();
@@ -52,6 +54,11 @@ function startTicking() {
         setTimeout(beep2, 300);
         document.getElementById('status').innerText = "Egg hatched!";
         tickCount = 0;
+
+        if (continuousMode) {
+            // Automatically restart the cycle if continuous mode is active
+            waitForSixthSecond();
+        }
     } else {
         document.getElementById('status').innerText = `Tick ${tickCount}`;
         waitForSixthSecond();
