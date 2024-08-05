@@ -8,7 +8,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/04/pokemon-eevee-sitting-in-field-anime-preview-desktop-wallpaper.jpg'); /* Pokémon-themed background */
+    background-image:url('/bgvid.avifs');
     background-size: cover;
     backdrop-filter: blur(5px); /* Optional: adds a slight blur to the background image */
 }
