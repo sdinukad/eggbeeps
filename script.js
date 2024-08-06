@@ -70,7 +70,7 @@ function startTicking() {
     tickCount++;
     beep();
     document.getElementById('ticksPassed').innerText = `Ticks passed: ${tickCount}`;
-    if ((donoCondition && flameCondition && tickCount >= 4) || (donoCondition && !flameCondition && tickCount >= 5) || (flameCondition && !donoCondition && tickCount >= 5) || (!flameCondition && !donoCondition && tickCount >= 6)) {
+    if ((donoCondition && flameCondition && tickCount >= 1) || (donoCondition && !flameCondition && tickCount >= 2) || (flameCondition && !donoCondition && tickCount >= 2) || (!flameCondition && !donoCondition && tickCount >= 3)) {
         beep2();
         setTimeout(beep2, 300);
         document.getElementById('status').innerText = "Eggs hatched!\nSwitch the next set in before the next tick.";
