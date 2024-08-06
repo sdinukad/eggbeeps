@@ -10,6 +10,13 @@ Simple app to help keep track of egg ticks when hatching eggs in PokeMMO.
 
 ## Live version [here](https://pkmneggticker.netlify.app/)
 
+### Screenshots
+![Mini Size](https://github.com/user-attachments/assets/bd2031d9-a350-40aa-851e-e1591a9a1988)
+![Hatch Complete](https://github.com/user-attachments/assets/dde665f5-016c-487a-ac96-12115f5b4b31)
+![Full Screen App](https://github.com/user-attachments/assets/510b7d80-402c-488e-bebb-ffe1a7560662)
+![Settings Page](https://github.com/user-attachments/assets/3cf4c942-5822-457c-9e63-619011295ae2)
+
+
 #### Read further if you want to package the app and run as a standalone app locally
 
 ### Prerequisites
