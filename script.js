@@ -2,36 +2,57 @@ let tickCount = 0;
 let countdownInterval;
 let tickTimeout;
 let continuousMode = false;
+let donoCondition = false;
+let flameCondition = false;
 
-document.getElementById('startButton').addEventListener('click', () => {
-    tickCount = 0;
-    document.getElementById('status').innerText = "Started...";
-    document.getElementById('ticksPassed').innerText = "Ticks passed: 0";
-    continuousMode = document.getElementById('continuousMode').checked; // Get continuous mode state
-    if (countdownInterval) clearInterval(countdownInterval);
-    if (tickTimeout) clearTimeout(tickTimeout);
-    waitForSixthSecond();
+document.getElementById('startStopButton').addEventListener('click', () => {
+    const startStopButton = document.getElementById('startStopButton');
+    if (startStopButton.innerText === 'Start') {
+        tickCount = 0;
+        document.getElementById('status').innerText = "Started...";
+        document.getElementById('ticksPassed').innerText = "Ticks passed: 0";
+        continuousMode = document.getElementById('continuousMode').checked; // Get continuous mode state
+        donoCondition = document.getElementById('donoCondition').checked; // Get tick condition state
+        flameCondition = document.getElementById('flameCondition').checked; // Get flame body condition state
+        startStopButton.innerText = 'Stop';
+        if (countdownInterval) clearInterval(countdownInterval);
+        if (tickTimeout) clearTimeout(tickTimeout);
+        waitForSixthSecond();
+    } else {
+        startStopButton.innerText = 'Start';
+        document.getElementById('status').innerText = "Stopped.";
+        if (countdownInterval) clearInterval(countdownInterval);
+        if (tickTimeout) clearTimeout(tickTimeout);
+    }
+});
+
+document.getElementById('settingsButton').addEventListener('click', () => {
+    document.getElementById('settingsPage').style.display = 'block';
+});
+
+document.getElementById('closeSettingsButton').addEventListener('click', () => {
+    document.getElementById('settingsPage').style.display = 'none';
 });
 
 function waitForSixthSecond() {
     const now = new Date();
-    const seconds = now.getSeconds();
-    const milliseconds = now.getMilliseconds();
-    let delay;
+    const currentSeconds = now.getSeconds();
+    const currentMilliseconds = now.getMilliseconds();
 
-    if (seconds < 6) {
-        delay = (6 - seconds) * 1000 - milliseconds;
+    let delayMilliseconds;
+
+    if (currentSeconds < 6) {
+        delayMilliseconds = (6 - currentSeconds) * 1000 - currentMilliseconds;
     } else {
-        delay = (60 - seconds + 6) * 1000 - milliseconds;
+        delayMilliseconds = (60 - currentSeconds + 6) * 1000 - currentMilliseconds;
     }
 
-    startCountdown(delay);
-    tickTimeout = setTimeout(startTicking, delay);
+    startCountdown(delayMilliseconds);
+    tickTimeout = setTimeout(startTicking, delayMilliseconds);
 }
 
-function startCountdown(delay) {
-    let remainingTime = Math.floor(delay / 1000);
-    document.getElementById('countdown').innerText = `Next tick in: ${remainingTime}s`;
+function startCountdown(delayMilliseconds) {
+    let remainingTime = Math.floor(delayMilliseconds / 1000);
 
     countdownInterval = setInterval(() => {
         remainingTime--;
@@ -40,8 +61,6 @@ function startCountdown(delay) {
         if (remainingTime <= 0) {
             clearInterval(countdownInterval);
             document.getElementById('countdown').innerText = `Next tick in: 0s`;
-        } else {
-            document.getElementById('countdown').innerText = `Next tick in: ${remainingTime}s`;
         }
 
     }, 1000);
@@ -50,18 +69,18 @@ function startCountdown(delay) {
 function startTicking() {
     tickCount++;
     beep();
-
     document.getElementById('ticksPassed').innerText = `Ticks passed: ${tickCount}`;
-
-    if (tickCount >= 4) {
+    if ((donoCondition && flameCondition && tickCount >= 1) || (donoCondition && !flameCondition && tickCount >= 2) || (flameCondition && !donoCondition && tickCount >= 2) || (!flameCondition && !donoCondition && tickCount >= 3)) {
         beep2();
         setTimeout(beep2, 300);
-        document.getElementById('status').innerText = "Egg hatched!";
+        document.getElementById('status').innerText = "Eggs hatched!\nSwitch the next set in before the next tick.";
         tickCount = 0;
 
         if (continuousMode) {
             // Automatically restart the cycle if continuous mode is active
             waitForSixthSecond();
+        } else {
+            document.getElementById('startStopButton').innerText = 'Start';
         }
     } else {
         document.getElementById('status').innerText = `Tick ${tickCount}`;
@@ -94,7 +113,7 @@ function beep2() {
     gainNode.connect(audioContext.destination);
 
     oscillator.type = 'square';
-    oscillator.frequency.setValueAtTime(1046, audioContext.currentTime); // frequency in Hz (A4 note)
+    oscillator.frequency.setValueAtTime(1046, audioContext.currentTime); // frequency in Hz (C6 note)
     gainNode.gain.setValueAtTime(1, audioContext.currentTime); // Set initial gain (volume)
 
     oscillator.start();

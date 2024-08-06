@@ -1,23 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PokeMMO Egg Hatching Helper</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Egg Hatch Ticker</h1>
-        <button id="startButton">Start</button>
-        <p id="status">Waiting to start...</p>
-        <p id="countdown">Next tick in: --</p>
-        <p id="ticksPassed">Ticks passed: 0</p>
-        
-        <label>
-            <input type="checkbox" id="continuousMode"> Continuous Mode
-        </label>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2a2a2a; /* Fallback dark background for dark mode */
+    color: #f0f0f0; /* Light text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('bgvid.avifs'); /* Animated AVIF background */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /*backdrop-filter: blur(5px); /* Optional: adds a slight blur to the background image */
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background for the container */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    backdrop-filter: blur(8px); /* Optional: adds a blur effect to the container */
+}
+
+/* Heading */
+h1 {
+    color: #ffffff; /* Pokémon yellow */
+    font-size: 1.5em; /* Adjusted for smaller window */
+}
+
+/* Start Button */
+button.start-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffcb05; /* Pokémon yellow */
+    color: #3b4cca; /* Pokémon blue */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+button.start-button:hover {
+    background-color: #ffcc00; /* Darker yellow on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Settings Button */
+button.settings-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3b4cca; /* Pokémon blue */
+    color: #e8e5d9; /* Pokémon yellow */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+button.settings-button:hover {
+    background-color: #324aa8; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Paragraphs */
+p {
+    font-size: 16px; /* Adjusted for smaller window */
+    color: #f0f0f0; /* Light text color for dark mode */
+    margin-top: 15px;
+}
+
+#countdown, #ticksPassed {
+    font-size: 18px; /* Adjusted for smaller window */
+    margin-top: 10px;
+    color: #ffcb05; /* Pokémon yellow */
+}
+
+/* Settings Page */
+.settings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9); /* Darker background for settings */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    /*backdrop-filter: blur(8px); /* Optional: adds a blur effect to the settings */
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.settings h2 {
+    color: #ffcb05; /* Pokémon yellow */
+    margin-bottom: 20px;
+}
+
+.settings label {
+    display: block;
+    margin: 10px 0;
+    color: #f0f0f0; /* Light text color for dark mode */
+}
+
+.settings input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Media Query for 400 x 300 window */
+@media only screen and (max-width: 400px) and (max-height: 300px) {
+    .container {
+        width: 100%;
+        height: 100%;
+        max-width: 400px;
+        max-height: 300px;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    button.start-button, button.settings-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    #countdown, #ticksPassed {
+        font-size: 16px;
+    }
+
+    .settings {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+    }
+
+    .settings h2 {
+        font-size: 1.2em;
+    }
+
+    .settings label {
+        font-size: 14px;
+    }
+}

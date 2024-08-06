@@ -1,16 +1,17 @@
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #2a2a2a; /* Dark background for dark mode */
+    background-color: #2a2a2a; /* Fallback dark background for dark mode */
     color: #f0f0f0; /* Light text color */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image:url('/bgvid.avifs');
+    background-image: url('bgvid.avifs'); /* Animated AVIF background */
     background-size: cover;
-    backdrop-filter: blur(5px); /* Optional: adds a slight blur to the background image */
+    background-repeat: no-repeat;
+    background-position: center;
+    /*backdrop-filter: blur(5px); /* Optional: adds a slight blur to the background image */
 }
 
 .container {
@@ -24,24 +25,43 @@ body {
 
 /* Heading */
 h1 {
-    color: #ffcb05; /* Pokémon yellow */
+    color: #ffffff; /* Pokémon yellow */
     font-size: 1.5em; /* Adjusted for smaller window */
 }
 
-/* Button */
-button {
+/* Start Button */
+button.start-button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     border-radius: 8px;
     background-color: #ffcb05; /* Pokémon yellow */
     color: #3b4cca; /* Pokémon blue */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
 }
 
-button:hover {
+button.start-button:hover {
     background-color: #ffcc00; /* Darker yellow on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Settings Button */
+button.settings-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #3b4cca; /* Pokémon blue */
+    color: #e8e5d9; /* Pokémon yellow */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+}
+
+button.settings-button:hover {
+    background-color: #324aa8; /* Darker blue on hover */
     transform: scale(1.05); /* Slightly scale up on hover */
 }
 
@@ -58,6 +78,37 @@ p {
     color: #ffcb05; /* Pokémon yellow */
 }
 
+/* Settings Page */
+.settings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9); /* Darker background for settings */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    /*backdrop-filter: blur(8px); /* Optional: adds a blur effect to the settings */
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.settings h2 {
+    color: #ffcb05; /* Pokémon yellow */
+    margin-bottom: 20px;
+}
+
+.settings label {
+    display: block;
+    margin: 10px 0;
+    color: #f0f0f0; /* Light text color for dark mode */
+}
+
+.settings input[type="checkbox"] {
+    margin-right: 10px;
+}
+
 /* Media Query for 400 x 300 window */
 @media only screen and (max-width: 400px) and (max-height: 300px) {
     .container {
@@ -72,7 +123,7 @@ p {
         font-size: 1.2em;
     }
 
-    button {
+    button.start-button, button.settings-button {
         padding: 8px 16px;
         font-size: 14px;
     }
@@ -83,5 +134,19 @@ p {
 
     #countdown, #ticksPassed {
         font-size: 16px;
+    }
+
+    .settings {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+    }
+
+    .settings h2 {
+        font-size: 1.2em;
+    }
+
+    .settings label {
+        font-size: 14px;
     }
 }
