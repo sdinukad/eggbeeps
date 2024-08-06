@@ -27,7 +27,7 @@ Before you begin, make sure you have the following installed:
     - Type the following command to download the project to your computer:
 
     ```sh
-    git clone https://github.com/yourusername/eggbeeps.git
+    git clone https://github.com/sdinukad/eggbeeps.git
     cd eggbeeps
     ```
 
@@ -90,3 +90,5 @@ To create a standalone application, you can package it for macOS or Windows.
     ```
 
     - This will create a packaged application for Windows in the `dist` folder.
+
+Might be a bit slow to launch first time
