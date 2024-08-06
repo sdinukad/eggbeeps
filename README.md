@@ -1,5 +1,5 @@
 # Egg Hatch Tick Alarm for Pokemmo
-Simple app to help keep track of egg ticks when hatching eggs in PokeMMO.
+Simple app to help keep track of egg ticks when hatching eggs in PokeMMO. Created with help of ChatGPT for personal use.
 
 ## Details
 * It will emit a slight beep at 1 tick and a louder double beep when eggs are hatched.
