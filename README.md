@@ -8,7 +8,7 @@ Simple app to help keep track of egg ticks when hatching eggs in PokeMMO.
 
 >If the next tick countdown gets bugged, you will need to reload the page. However it is only visual and you will still hear the egg beeps. (Possibly fixed already more testing needed)
 
-### Live version [here](https://pkmneggticker.netlify.app/)
+## Live version [here](https://pkmneggticker.netlify.app/)
 
 ## Read further if you want to package the app and run as a standalone app locally
 
