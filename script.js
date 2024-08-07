@@ -12,7 +12,7 @@ document.getElementById('startStopButton').addEventListener('click', () => {
         document.getElementById('status').innerText = "Started...";
         document.getElementById('ticksPassed').innerText = "Ticks passed: 0";
         continuousMode = document.getElementById('continuousMode').checked; // Get continuous mode state
-        donoCondition = document.getElementById('donoCondition').checked; // Get tick condition state
+        donoCondition = document.getElementById('donoCondition').checked; // Get donator status condition state
         flameCondition = document.getElementById('flameCondition').checked; // Get flame body condition state
         startStopButton.innerText = 'Stop';
         if (countdownInterval) clearInterval(countdownInterval);
@@ -88,7 +88,7 @@ function startTicking() {
     }
 }
 
-function beep() {
+function beep() { //small beep
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
@@ -100,11 +100,11 @@ function beep() {
     oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // frequency in Hz (A4 note)
     oscillator.start();
 
-    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.2); // Beep duration
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.2); // Beep duration and volumw
     oscillator.stop(audioContext.currentTime + 0.2);
 }
 
-function beep2() {
+function beep2() { //loud beep
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
@@ -113,7 +113,7 @@ function beep2() {
     gainNode.connect(audioContext.destination);
 
     oscillator.type = 'square';
-    oscillator.frequency.setValueAtTime(1046, audioContext.currentTime); // frequency in Hz (C6 note)
+    oscillator.frequency.setValueAtTime(1046, audioContext.currentTime); // frequency in Hz 
     gainNode.gain.setValueAtTime(1, audioContext.currentTime); // Set initial gain (volume)
 
     oscillator.start();
